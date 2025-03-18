@@ -64,9 +64,15 @@ def interp2x(x, y, z, xi, yi):
         yi = y[0]
     elif yi >= y[-1]:
         yi = y[-1]
+    # Convert the grid to a set of points for LinearNDInterpolator
+    xgrid, ygrid = np.meshgrid(x, y)
+    points = np.vstack((xgrid.flatten(), ygrid.flatten())).T
+    values = z.flatten()
     
-    # Use scipy's interpolate for 2D interpolation
-    interp_func = interpolate.RegularGridInterpolator((y, x), z, 
-                                                     bounds_error=False, 
-                                                     fill_value=None)
-    return float(interp_func((yi, xi)))
+    # Create the interpolator with the points and values
+    interp_func = interpolate.LinearNDInterpolator(points, values)
+    
+    # Query the interpolator at point (xi, yi)
+    result = interp_func(np.array([xi, yi]))
+    
+    return float(result[0])
