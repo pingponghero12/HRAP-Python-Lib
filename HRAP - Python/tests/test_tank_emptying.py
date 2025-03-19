@@ -4,6 +4,12 @@ from scipy import optimize
 import sys
 import os
 
+from pathlib import Path
+
+# Add project root to Python path
+project_root = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, str(project_root))
+
 # Add the project directory to the path
 sys.path.insert(0, os.path.abspath('.'))
 

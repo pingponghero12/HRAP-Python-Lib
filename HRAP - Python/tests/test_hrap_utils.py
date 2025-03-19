@@ -3,7 +3,11 @@ import matplotlib.pyplot as plt
 import sys
 import os
 
-sys.path.insert(0, os.path.abspath('.'))
+from pathlib import Path
+
+# Add project root to Python path
+project_root = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, str(project_root))
 
 from hrap.utils.interpolation import interp1x, interp2x
 from hrap.utils.nox import nox

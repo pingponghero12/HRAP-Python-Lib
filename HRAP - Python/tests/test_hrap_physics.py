@@ -4,7 +4,11 @@ import sys
 import os
 import scipy.optimize
 
-sys.path.insert(0, os.path.abspath('.'))
+from pathlib import Path
+
+# Add project root to Python path
+project_root = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, str(project_root))
 
 from hrap.utils.chamber import chamber
 from hrap.utils.nozzle import nozzle
